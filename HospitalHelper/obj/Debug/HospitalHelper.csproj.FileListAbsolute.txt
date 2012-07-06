@@ -1,0 +1,10 @@
+C:\Users\Krwlng\Documents\Visual Studio 2010\Projects\HospitalHelper\HospitalHelper\bin\HospitalHelper.dll
+C:\Users\Krwlng\Documents\Visual Studio 2010\Projects\HospitalHelper\HospitalHelper\bin\HospitalHelper.pdb
+C:\Users\Krwlng\Documents\Visual Studio 2010\Projects\HospitalHelper\HospitalHelper\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Krwlng\Documents\Visual Studio 2010\Projects\HospitalHelper\HospitalHelper\obj\Debug\HospitalHelper.dll
+C:\Users\Krwlng\Documents\Visual Studio 2010\Projects\HospitalHelper\HospitalHelper\obj\Debug\HospitalHelper.pdb
+D:\GraduateProject\HospitalHelper\HospitalHelper\bin\HospitalHelper.dll
+D:\GraduateProject\HospitalHelper\HospitalHelper\bin\HospitalHelper.pdb
+D:\GraduateProject\HospitalHelper\HospitalHelper\obj\Debug\ResolveAssemblyReference.cache
+D:\GraduateProject\HospitalHelper\HospitalHelper\obj\Debug\HospitalHelper.dll
+D:\GraduateProject\HospitalHelper\HospitalHelper\obj\Debug\HospitalHelper.pdb
