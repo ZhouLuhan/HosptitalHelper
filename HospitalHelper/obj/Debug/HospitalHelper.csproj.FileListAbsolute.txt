@@ -8,3 +8,8 @@ D:\GraduateProject\HospitalHelper\HospitalHelper\bin\HospitalHelper.pdb
 D:\GraduateProject\HospitalHelper\HospitalHelper\obj\Debug\ResolveAssemblyReference.cache
 D:\GraduateProject\HospitalHelper\HospitalHelper\obj\Debug\HospitalHelper.dll
 D:\GraduateProject\HospitalHelper\HospitalHelper\obj\Debug\HospitalHelper.pdb
+D:\HosptitalHelper\HospitalHelper\bin\HospitalHelper.dll
+D:\HosptitalHelper\HospitalHelper\bin\HospitalHelper.pdb
+D:\HosptitalHelper\HospitalHelper\obj\Debug\ResolveAssemblyReference.cache
+D:\HosptitalHelper\HospitalHelper\obj\Debug\HospitalHelper.dll
+D:\HosptitalHelper\HospitalHelper\obj\Debug\HospitalHelper.pdb

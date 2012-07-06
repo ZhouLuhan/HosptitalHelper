@@ -60,6 +60,8 @@
     <Content Include="NewPatientII.aspx" />
     <Content Include="OperatorManager.aspx" />
     <Content Include="PasswordChange.aspx" />
+    <Content Include="PhysicalExamItem.aspx" />
+    <Content Include="PhysicalExamType.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
@@ -135,6 +137,20 @@
     </Compile>
     <Compile Include="PasswordChange.aspx.designer.cs">
       <DependentUpon>PasswordChange.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhysicalExamItem.aspx.cs">
+      <DependentUpon>PhysicalExamItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhysicalExamItem.aspx.designer.cs">
+      <DependentUpon>PhysicalExamItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhysicalExamType.aspx.cs">
+      <DependentUpon>PhysicalExamType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhysicalExamType.aspx.designer.cs">
+      <DependentUpon>PhysicalExamType.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
