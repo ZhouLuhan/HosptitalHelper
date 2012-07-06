@@ -6,7 +6,7 @@ CodeBehind="OperatorManager.aspx.cs" Inherits="HospitalHelper.OperatorManager" %
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False"
         DataKeyNames="HID" DataSourceID="SqlDataSource1" AllowPaging="True" PageIndex="1">
         <Columns>
-            <asp:BoundField DataField="HID" HeaderText="用户名" SortExpression="HID" 
+            <asp:BoundField DataField="HID" HeaderText="用户名" SortExpression="HID" ReadOnly="True" 
                  />
             <asp:BoundField DataField="PSW" HeaderText="密码" SortExpression="PSW" />
             <asp:CheckBoxField DataField="LIM" HeaderText="权限" SortExpression="LIM" />
@@ -15,7 +15,8 @@ CodeBehind="OperatorManager.aspx.cs" Inherits="HospitalHelper.OperatorManager" %
             <asp:TemplateField HeaderText="删除">
                 <ItemTemplate>
                     <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
-                        CommandName="Delete" onclientclick="return confirm('确认要删除吗？')">删除</asp:LinkButton>
+                        CommandName="Delete" onclientclick="return confirm('确认要删除吗？')" 
+                        >删除</asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
