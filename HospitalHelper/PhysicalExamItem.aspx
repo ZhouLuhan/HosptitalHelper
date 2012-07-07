@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
     <div>
     
-        <asp:DropDownList ID="DropDownList1" runat="server" 
+        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="true"
             DataSourceID="SqlDataSource1" DataTextField="NAME" DataValueField="TYPE" 
             onselectedindexchanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList>
@@ -55,6 +55,7 @@
                 SortExpression="MINVALUE" />
             <asp:BoundField DataField="MAXVALUE" HeaderText="MAXVALUE" 
                 SortExpression="MAXVALUE" />
+            <asp:CommandField CancelText="取消" InsertText="插入" ShowInsertButton="True" />
         </Fields>
     </asp:DetailsView>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
@@ -62,7 +63,8 @@
         SelectCommand="SELECT * FROM [TESTITEM] WHERE ([TYPE] = @TYPE)" 
         DeleteCommand="DELETE FROM [TESTITEM] WHERE [TID] = @TID AND [TYPE] = @TYPE" 
         InsertCommand="INSERT INTO [TESTITEM] ([TID], [NAME], [TYPE], [IMPORTANT], [UNIT], [MINVALUE], [MAXVALUE]) VALUES (@TID, @NAME, @TYPE, @IMPORTANT, @UNIT, @MINVALUE, @MAXVALUE)" 
-        UpdateCommand="UPDATE [TESTITEM] SET [NAME] = @NAME, [IMPORTANT] = @IMPORTANT, [UNIT] = @UNIT, [MINVALUE] = @MINVALUE, [MAXVALUE] = @MAXVALUE WHERE [TID] = @TID AND [TYPE] = @TYPE">
+        UpdateCommand="UPDATE [TESTITEM] SET [NAME] = @NAME, [IMPORTANT] = @IMPORTANT, [UNIT] = @UNIT, [MINVALUE] = @MINVALUE, [MAXVALUE] = @MAXVALUE WHERE [TID] = @TID AND [TYPE] = @TYPE"
+        oninserted="inserted_navigate">
         <DeleteParameters>
             <asp:Parameter Name="TID" Type="Int32" />
             <asp:Parameter Name="TYPE" Type="Int32" />
@@ -70,7 +72,8 @@
         <InsertParameters>
             <asp:Parameter Name="TID" Type="Int32" />
             <asp:Parameter Name="NAME" Type="String" />
-            <asp:Parameter Name="TYPE" Type="Int32" />
+            <asp:ControlParameter ControlID="DropDownList1" Name="TYPE"
+                PropertyName="SelectedValue" Type="Int32" />
             <asp:Parameter Name="IMPORTANT" Type="Boolean" />
             <asp:Parameter Name="UNIT" Type="String" />
             <asp:Parameter Name="MINVALUE" Type="Double" />
@@ -90,7 +93,6 @@
             <asp:Parameter Name="TYPE" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
-    <asp:Button ID="Button1" runat="server" Text="添加" onclick="Button1_Click" />
     </form>
 </body>
 </html>
