@@ -11,15 +11,16 @@
     <div>
     
         <asp:DropDownList ID="DropDownList1" runat="server" 
-            DataSourceID="SqlDataSource1" DataTextField="TYPE" DataValueField="TYPE">
+            DataSourceID="SqlDataSource1" DataTextField="NAME" DataValueField="TYPE" 
+            onselectedindexchanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
-            SelectCommand="SELECT DISTINCT [TYPE] FROM [TESTITEM]"></asp:SqlDataSource>
+            SelectCommand="SELECT * FROM [TESTTYPE]"></asp:SqlDataSource>
     
     </div>
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="TID,TYPE"
-        DataSourceID="SqlDataSource2">
+        DataSourceID="SqlDataSource2" AllowPaging="True">
         <Columns>
             <asp:BoundField DataField="TID" HeaderText="NO." SortExpression="TID" />
             <asp:BoundField DataField="NAME" HeaderText="项目" SortExpression="NAME" />
@@ -40,6 +41,22 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" 
+        DataKeyNames="TID,TYPE" DataSourceID="SqlDataSource2" Height="50px" 
+        Width="125px" DefaultMode="Insert">
+        <Fields>
+            <asp:BoundField DataField="TID" HeaderText="TID" ReadOnly="True" 
+                SortExpression="TID" />
+            <asp:BoundField DataField="NAME" HeaderText="NAME" SortExpression="NAME" />
+            <asp:CheckBoxField DataField="IMPORTANT" HeaderText="IMPORTANT" 
+                SortExpression="IMPORTANT" />
+            <asp:BoundField DataField="UNIT" HeaderText="UNIT" SortExpression="UNIT" />
+            <asp:BoundField DataField="MINVALUE" HeaderText="MINVALUE" 
+                SortExpression="MINVALUE" />
+            <asp:BoundField DataField="MAXVALUE" HeaderText="MAXVALUE" 
+                SortExpression="MAXVALUE" />
+        </Fields>
+    </asp:DetailsView>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
         ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
         SelectCommand="SELECT * FROM [TESTITEM] WHERE ([TYPE] = @TYPE)" 
@@ -73,6 +90,7 @@
             <asp:Parameter Name="TYPE" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
+    <asp:Button ID="Button1" runat="server" Text="添加" onclick="Button1_Click" />
     </form>
 </body>
 </html>

@@ -22,13 +22,14 @@ namespace HospitalHelper
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
             SqlConnection conn = new SqlConnection(strcon);
             conn.Open();
-            SqlCommand commcount = new SqlCommand("SELECT MAX(TYPE) FROM TESTTYPE", conn);
+            SqlCommand commcount = new SqlCommand("SELECT COUNT(*), MAX(TYPE) FROM TESTTYPE", conn);
             commcount.ExecuteNonQuery();
             SqlDataReader reader =  commcount.ExecuteReader();
-            
+            reader.Read();
+
             int count;
-            if (reader.Read())
-                count = reader.GetInt32(0);
+            if (reader.GetInt32(0) > 0)          
+                count = reader.GetInt32(1);
             else count = 0;
             reader.Close();
 
