@@ -25,8 +25,11 @@ namespace HospitalHelper
             SqlCommand commcount = new SqlCommand("SELECT MAX(TYPE) FROM TESTTYPE", conn);
             commcount.ExecuteNonQuery();
             SqlDataReader reader =  commcount.ExecuteReader();
-            reader.Read();
-            int count = reader.GetInt32(0);
+            
+            int count;
+            if (reader.Read())
+                count = reader.GetInt32(0);
+            else count = 0;
             reader.Close();
 
             SqlCommand comm = new SqlCommand("INSERT INTO [TESTTYPE](TYPE,NAME) VALUES (@TYPE, @NAME)", conn);

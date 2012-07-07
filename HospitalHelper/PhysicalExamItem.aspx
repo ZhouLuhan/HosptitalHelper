@@ -15,10 +15,10 @@
         </asp:DropDownList>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
-            SelectCommand="SELECT [TYPE] FROM [TESTITEM]"></asp:SqlDataSource>
+            SelectCommand="SELECT DISTINCT [TYPE] FROM [TESTITEM]"></asp:SqlDataSource>
     
     </div>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="TID,TYPE"
         DataSourceID="SqlDataSource2">
         <Columns>
             <asp:BoundField DataField="TID" HeaderText="NO." SortExpression="TID" />
@@ -42,11 +42,36 @@
     </asp:GridView>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
         ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
-        SelectCommand="SELECT [NAME], [TID], [IMPORTANT], [UNIT], [MINVALUE], [MAXVALUE] FROM [TESTITEM] WHERE ([TYPE] = @TYPE)">
+        SelectCommand="SELECT * FROM [TESTITEM] WHERE ([TYPE] = @TYPE)" 
+        DeleteCommand="DELETE FROM [TESTITEM] WHERE [TID] = @TID AND [TYPE] = @TYPE" 
+        InsertCommand="INSERT INTO [TESTITEM] ([TID], [NAME], [TYPE], [IMPORTANT], [UNIT], [MINVALUE], [MAXVALUE]) VALUES (@TID, @NAME, @TYPE, @IMPORTANT, @UNIT, @MINVALUE, @MAXVALUE)" 
+        UpdateCommand="UPDATE [TESTITEM] SET [NAME] = @NAME, [IMPORTANT] = @IMPORTANT, [UNIT] = @UNIT, [MINVALUE] = @MINVALUE, [MAXVALUE] = @MAXVALUE WHERE [TID] = @TID AND [TYPE] = @TYPE">
+        <DeleteParameters>
+            <asp:Parameter Name="TID" Type="Int32" />
+            <asp:Parameter Name="TYPE" Type="Int32" />
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="TID" Type="Int32" />
+            <asp:Parameter Name="NAME" Type="String" />
+            <asp:Parameter Name="TYPE" Type="Int32" />
+            <asp:Parameter Name="IMPORTANT" Type="Boolean" />
+            <asp:Parameter Name="UNIT" Type="String" />
+            <asp:Parameter Name="MINVALUE" Type="Double" />
+            <asp:Parameter Name="MAXVALUE" Type="Double" />
+        </InsertParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="DropDownList1" Name="TYPE" 
                 PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="NAME" Type="String" />
+            <asp:Parameter Name="IMPORTANT" Type="Boolean" />
+            <asp:Parameter Name="UNIT" Type="String" />
+            <asp:Parameter Name="MINVALUE" Type="Double" />
+            <asp:Parameter Name="MAXVALUE" Type="Double" />
+            <asp:Parameter Name="TID" Type="Int32" />
+            <asp:Parameter Name="TYPE" Type="Int32" />
+        </UpdateParameters>
     </asp:SqlDataSource>
     </form>
 </body>
