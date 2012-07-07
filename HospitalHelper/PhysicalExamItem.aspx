@@ -11,7 +11,7 @@
     <div>
     
         <asp:DropDownList ID="DropDownList1" runat="server" 
-            AutoPostBack=true
+            AutoPostBack="true"
             DataSourceID="SqlDataSource1" DataTextField="NAME" DataValueField="TYPE" 
             onselectedindexchanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList>
