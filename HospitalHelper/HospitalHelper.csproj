@@ -56,6 +56,8 @@
     </Content>
     <Content Include="FindPatient.aspx" />
     <Content Include="FollowupPatient.aspx" />
+    <Content Include="NewFollowUpProspect.aspx" />
+    <Content Include="NewFollowUpTest.aspx" />
     <Content Include="NewPatient.aspx" />
     <Content Include="NewPatientII.aspx" />
     <Content Include="OperatorManager.aspx" />
@@ -109,6 +111,20 @@
     </Compile>
     <Compile Include="Menu.Master.designer.cs">
       <DependentUpon>Menu.Master</DependentUpon>
+    </Compile>
+    <Compile Include="NewFollowUpProspect.aspx.cs">
+      <DependentUpon>NewFollowUpProspect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewFollowUpProspect.aspx.designer.cs">
+      <DependentUpon>NewFollowUpProspect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewFollowUpTest.aspx.cs">
+      <DependentUpon>NewFollowUpTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewFollowUpTest.aspx.designer.cs">
+      <DependentUpon>NewFollowUpTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="NewPatient.aspx.cs">
       <DependentUpon>NewPatient.aspx</DependentUpon>
