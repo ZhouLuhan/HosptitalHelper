@@ -9,6 +9,8 @@ namespace HospitalHelper
 {
     public partial class NewFollowUpTest : System.Web.UI.Page
     {
+        private int fid = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
