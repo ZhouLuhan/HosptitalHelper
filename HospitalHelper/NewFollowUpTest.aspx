@@ -10,6 +10,15 @@
     <form id="form1" runat="server">
     <div>
     
+        <asp:Button ID="Button1" runat="server" Text="添加" onclick="Button1_Click" />
+    
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
+            SelectCommand="SELECT * FROM [TESTTYPE]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
+            SelectCommand="SELECT * FROM [TESTITEM]"></asp:SqlDataSource>
+    
     </div>
     </form>
 </body>
