@@ -15,9 +15,9 @@
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
             SelectCommand="SELECT * FROM [TESTTYPE]"></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+<%--        <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
             ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
-            SelectCommand="SELECT * FROM [TESTITEM]"></asp:SqlDataSource>
+            SelectCommand="SELECT * FROM [TESTITEM]"></asp:SqlDataSource>--%>
     
     </div>
     </form>
