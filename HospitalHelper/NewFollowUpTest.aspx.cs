@@ -13,7 +13,8 @@ namespace HospitalHelper
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            TemplateField field = new TemplateField();
+            ITemplate it = new ITemplate();
         }
     }
 }
