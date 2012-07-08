@@ -13,8 +13,7 @@ namespace HospitalHelper
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            TemplateField field = new TemplateField();
-            ITemplate it = new ITemplate();
+            
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -26,14 +25,15 @@ namespace HospitalHelper
         protected void Button1_Click(object sender, EventArgs e)
         {
             DropDownList droptype = new DropDownList();
+            droptype.ID = "droptype1";
             form1.Controls.Add(droptype);
             droptype.AutoPostBack = true;
             droptype.DataSourceID = "SqlDataSource1";
-            droptype.DataBind();
             droptype.DataValueField = "TYPE";
             droptype.DataTextField = "NAME";
+            droptype.DataBind();
             //droptype.SelectedValue = "1";
-            droptype.SelectedIndexChanged += new EventHandler(DropDownList1_SelectedIndexChanged);
+            //droptype.SelectedIndexChanged += new EventHandler(DropDownList1_SelectedIndexChanged);
 
             GridView grid = new GridView();
             form1.Controls.Add(grid);
@@ -41,7 +41,9 @@ namespace HospitalHelper
             grid.DataKeyNames = array;
             
             SqlDataSource2.SelectCommand = "SELECT * FROM TESTITEM WHERE TYPE=@TYPE";
-            SqlDataSource2.SelectParameters.Add("@TYPE", droptype.SelectedValue);                   
+            //SqlDataSource2.SelectParameters.Add(new QueryStringParameter("@TYPE", droptype.SelectedValue));
+            //string str = (SqlDataSource2.SelectParameters["@TYPE"] as QueryStringParameter).QueryStringField;
+            SqlDataSource2.SelectParameters.Add(new ControlParameter("TYPE", "droptype1", "SelectedValue"));
             
             BoundField bid = new BoundField();
             bid.DataField = "TID";
