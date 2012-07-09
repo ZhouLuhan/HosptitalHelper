@@ -64,6 +64,7 @@
     <Content Include="PasswordChange.aspx" />
     <Content Include="PhysicalExamItem.aspx" />
     <Content Include="PhysicalExamType.aspx" />
+    <Content Include="ShowFollowUpList.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
@@ -169,6 +170,14 @@
       <DependentUpon>PhysicalExamType.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowFollowUpList.aspx.cs">
+      <DependentUpon>ShowFollowUpList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowFollowUpList.aspx.designer.cs">
+      <DependentUpon>ShowFollowUpList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TextBoxTemplate.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

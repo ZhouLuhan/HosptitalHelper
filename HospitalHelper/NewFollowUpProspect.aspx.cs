@@ -12,6 +12,8 @@ namespace HospitalHelper
 {
     public partial class NewFollowUpProspect : System.Web.UI.Page
     {
+        private int pid = 1;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -31,7 +33,7 @@ namespace HospitalHelper
             else fid = 1;
             reader.Close();
 
-            comm = new SqlCommand("INSERT INTO [FOLLOWUP](FID, FDATE, FDESCRIPTION, FDOCTOR) VALUES (@FID, @FDATE, @FDESCRIPTION, @FDOCTOR)", conn);
+            comm = new SqlCommand("INSERT INTO [FOLLOWUP](FID, FDATE, FDESCRIPTION, FDOCTOR, PID) VALUES (@FID, @FDATE, @FDESCRIPTION, @FDOCTOR, @PID)", conn);
             PickData(comm, fid);
             comm.ExecuteNonQuery();
 
@@ -74,6 +76,7 @@ namespace HospitalHelper
             comm.Parameters.Add("@FDATE", tTime.Text);
             comm.Parameters.Add("@FDESCRIPTION", tDescription.Text);
             comm.Parameters.Add("@FDOCTOR", tDoctor.Text);
+            comm.Parameters.Add("@PID", pid.ToString());
         }
     }
 }
