@@ -64,6 +64,9 @@
     <Content Include="PasswordChange.aspx" />
     <Content Include="PhysicalExamItem.aspx" />
     <Content Include="PhysicalExamType.aspx" />
+    <Content Include="ShowFollowUpList.aspx" />
+    <Content Include="ShowFollowUpProspect.aspx" />
+    <Content Include="ShowFollowUpTest.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
@@ -169,6 +172,28 @@
       <DependentUpon>PhysicalExamType.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowFollowUpList.aspx.cs">
+      <DependentUpon>ShowFollowUpList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowFollowUpList.aspx.designer.cs">
+      <DependentUpon>ShowFollowUpList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowFollowUpProspect.aspx.cs">
+      <DependentUpon>ShowFollowUpProspect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowFollowUpProspect.aspx.designer.cs">
+      <DependentUpon>ShowFollowUpProspect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowFollowUpTest.aspx.cs">
+      <DependentUpon>ShowFollowUpTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowFollowUpTest.aspx.designer.cs">
+      <DependentUpon>ShowFollowUpTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TextBoxTemplate.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

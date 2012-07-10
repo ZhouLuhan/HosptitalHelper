@@ -12,16 +12,14 @@ namespace HospitalHelper
 {
     public partial class NewFollowUpTest : System.Web.UI.Page
     {
-        private int fid = 0;
+        private int fid = 1;
         DropDownList[] droptype = new DropDownList[100];
         GridView[] grid = new GridView[100];
         SqlDataSource[] source = new SqlDataSource[100];
         static int count = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
-
             for (int i = 0; i < 100; i++)
             {
                 droptype[i] = new DropDownList();
@@ -67,6 +65,13 @@ namespace HospitalHelper
                 bunit.DataField = "UNIT";
                 bunit.HeaderText = "单位";
                 grid[i].Columns.Add(bunit);
+                
+
+                TemplateField bresult = new TemplateField();
+                TextBoxTemplate template = new TextBoxTemplate();
+                bresult.HeaderText = "结果";
+                bresult.ItemTemplate = template;
+                grid[i].Columns.Add(bresult);
 
                 //BoundField bresult = new BoundField();
                 //bresult.HeaderText = "结果";
@@ -90,7 +95,7 @@ namespace HospitalHelper
 
             //droptype = new DropDownList();
             //form1.Controls.Add(droptype);
-            
+           
             
             //GridView grid = new GridView();
             //form1.Controls.Add(grid);
