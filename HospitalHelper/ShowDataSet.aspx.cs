@@ -86,6 +86,7 @@ namespace HospitalHelper
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if (form1.Controls.Count % 2 != 0) form1.Controls.RemoveAt(form1.Controls.Count - 1);
+            if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
 
             int index = (form1.Controls.IndexOf((DropDownList)sender) - 14) / 2;
             source[index].SelectCommand = "SELECT * FROM TESTITEM WHERE TYPE=" + droptype[index].SelectedValue;
