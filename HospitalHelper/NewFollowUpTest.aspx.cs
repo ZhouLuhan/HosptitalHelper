@@ -17,10 +17,11 @@ namespace HospitalHelper
         GridView[] grid = new GridView[100];
         SqlDataSource[] source = new SqlDataSource[100];
         static int count = 0;
-        protected void Page_Load(object sender, EventArgs e)
+
+        protected override void OnInit(EventArgs e)
         {
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
-            for (int i = 0; i < count+1-1; i++)
+            for (int i = 0; i < count + 1 - 1; i++)
             {
                 droptype[i] = new DropDownList();
                 grid[i] = new GridView();
@@ -34,7 +35,15 @@ namespace HospitalHelper
                 droptype[i].DataValueField = "TYPE";
                 droptype[i].DataTextField = "NAME";
                 droptype[i].DataBind();
+            }
+            base.OnInit(e);
+        }
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
+            for (int i = 0; i < count; ++i)
+            {
                 string[] array = { "TID" };
                 grid[i].DataKeyNames = array;
                 //SqlDataSource2.SelectCommand = "SELECT * FROM TESTITEM WHERE TYPE=" + Convert.ToInt32(droptype[i].SelectedValue);
@@ -60,6 +69,7 @@ namespace HospitalHelper
                 bunit.HeaderText = "单位";
                 grid[i].Columns.Add(bunit);
 
+
                 TemplateField bresult = new TemplateField();
                 TextBoxTemplate template = new TextBoxTemplate();
                 bresult.HeaderText = "结果";
@@ -68,6 +78,11 @@ namespace HospitalHelper
 
                 grid[i].DataBind();
             }
+        }
+
+        void Load_Complete(object sender, EventArgs e)
+        {
+
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,8 +141,6 @@ namespace HospitalHelper
             grid[count].Columns.Add(bresult);
 
             grid[count++].DataBind();
-
-            SaveViewState();
         }
     }
 }

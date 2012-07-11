@@ -65,12 +65,15 @@
     <Content Include="PhysicalExamItem.aspx" />
     <Content Include="PhysicalExamType.aspx" />
     <Content Include="ShowFollowUpList.aspx" />
+    <Content Include="ShowFollowUpProspect.aspx" />
+    <Content Include="ShowFollowUpTest.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="try.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -177,7 +180,28 @@
     <Compile Include="ShowFollowUpList.aspx.designer.cs">
       <DependentUpon>ShowFollowUpList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ShowFollowUpProspect.aspx.cs">
+      <DependentUpon>ShowFollowUpProspect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowFollowUpProspect.aspx.designer.cs">
+      <DependentUpon>ShowFollowUpProspect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowFollowUpTest.aspx.cs">
+      <DependentUpon>ShowFollowUpTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowFollowUpTest.aspx.designer.cs">
+      <DependentUpon>ShowFollowUpTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TextBoxTemplate.cs" />
+    <Compile Include="try.aspx.cs">
+      <DependentUpon>try.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="try.aspx.designer.cs">
+      <DependentUpon>try.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
