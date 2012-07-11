@@ -83,7 +83,7 @@ namespace HospitalHelper
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            int index = (form1.Controls.IndexOf((DropDownList)sender) - 3) / 2 - 1;
+            int index = (form1.Controls.IndexOf((DropDownList)sender) - 4) / 2;
             source[index].SelectCommand = "SELECT * FROM TESTITEM WHERE TYPE=" + Convert.ToInt32(droptype[index].SelectedValue);
             grid[index].DataSource = source[index];
             grid[index].DataBind();
