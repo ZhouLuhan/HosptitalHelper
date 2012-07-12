@@ -38,9 +38,11 @@ namespace HospitalHelper
                 droptype[i].DataBind();
 
                 source[i] = new SqlDataSource(strcon, "SELECT * FROM TESTITEM WHERE TYPE=" + droptype[i].SelectedValue);
+                dropitem[i].AutoPostBack = true;
                 dropitem[i].DataSource = source[i];
                 dropitem[i].DataTextField = "NAME";
                 dropitem[i].DataValueField = "TID";
+                dropitem[i].SelectedIndexChanged += new EventHandler(DropDownList2_SelectedIndexChanged);
                 dropitem[i].DataBind();
             }      
             base.OnInit(e);
@@ -49,7 +51,12 @@ namespace HospitalHelper
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) { count = 0; submit = 0; }
-            if (submit > 0) { submit = 0; Bsubmit_Click(Bsubmit, new EventArgs()); }
+            if (submit > 0)
+            {
+                GridView grid = new GridView();
+                form1.Controls.Add(grid);
+                submit = form1.Controls.IndexOf(grid);
+            }
         }
 
         protected void Badd_Click(object sender, EventArgs e)
@@ -74,9 +81,11 @@ namespace HospitalHelper
 
             
             source[count] = new SqlDataSource(strcon, "SELECT * FROM TESTITEM WHERE TYPE=" + droptype[count].SelectedValue);
+            dropitem[count].AutoPostBack = true;
             dropitem[count].DataSource = source[count];
             dropitem[count].DataTextField = "NAME";
             dropitem[count].DataValueField = "TID";
+            dropitem[count].SelectedIndexChanged += new EventHandler(DropDownList2_SelectedIndexChanged);
             
             dropitem[count].DataBind();
             count++;
@@ -92,6 +101,11 @@ namespace HospitalHelper
             source[index].SelectCommand = "SELECT * FROM TESTITEM WHERE TYPE=" + droptype[index].SelectedValue;
             dropitem[index].DataSource = source[index];
             dropitem[index].DataBind();
+        }
+
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
         }
 
         protected void Bsubmit_Click(object sender, EventArgs e)
