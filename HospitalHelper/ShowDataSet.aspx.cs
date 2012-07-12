@@ -17,10 +17,10 @@ namespace HospitalHelper
         DropDownList[] dropitem = new DropDownList[100];
         SqlDataSource[] source = new SqlDataSource[100];
         static int count;
+        static int submit = 0;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
-            if (!IsPostBack) count = 0;
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
 
             for (int i = 0; i < count; i++)
@@ -34,22 +34,37 @@ namespace HospitalHelper
                 droptype[i].DataSourceID = "SqlDataSource1";
                 droptype[i].DataTextField = "NAME";
                 droptype[i].DataValueField = "TYPE";
-                droptype[i].SelectedIndexChanged += new EventHandler(DropDownList1_SelectedIndexChanged);               
+                droptype[i].SelectedIndexChanged += new EventHandler(DropDownList1_SelectedIndexChanged);
                 droptype[i].DataBind();
-                
-                source[i] = new SqlDataSource(strcon,"SELECT * FROM TESTITEM WHERE TYPE=" + droptype[i].SelectedValue);
+
+                source[i] = new SqlDataSource(strcon, "SELECT * FROM TESTITEM WHERE TYPE=" + droptype[i].SelectedValue);
+                dropitem[i].AutoPostBack = true;
                 dropitem[i].DataSource = source[i];
                 dropitem[i].DataTextField = "NAME";
                 dropitem[i].DataValueField = "TID";
+                dropitem[i].SelectedIndexChanged += new EventHandler(DropDownList2_SelectedIndexChanged);
                 dropitem[i].DataBind();
-            }           
-            
+            }      
+            base.OnInit(e);
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack) { count = 0; submit = 0; }
+            if (submit > 0)
+            {
+                GridView grid = new GridView();
+                form1.Controls.Add(grid);
+                submit = form1.Controls.IndexOf(grid);
+            }
         }
 
         protected void Badd_Click(object sender, EventArgs e)
         {
             //if (form1.Controls.Count % 2 != 0) form1.Controls.RemoveAt(form1.Controls.Count - 1);
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
+
+            if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
 
             droptype[count] = new DropDownList();
             dropitem[count] = new DropDownList();
@@ -66,9 +81,11 @@ namespace HospitalHelper
 
             
             source[count] = new SqlDataSource(strcon, "SELECT * FROM TESTITEM WHERE TYPE=" + droptype[count].SelectedValue);
+            dropitem[count].AutoPostBack = true;
             dropitem[count].DataSource = source[count];
             dropitem[count].DataTextField = "NAME";
             dropitem[count].DataValueField = "TID";
+            dropitem[count].SelectedIndexChanged += new EventHandler(DropDownList2_SelectedIndexChanged);
             
             dropitem[count].DataBind();
             count++;
@@ -78,6 +95,7 @@ namespace HospitalHelper
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if (form1.Controls.Count % 2 != 0) form1.Controls.RemoveAt(form1.Controls.Count - 1);
+            if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
 
             int index = (form1.Controls.IndexOf((DropDownList)sender) - 14) / 2;
             source[index].SelectCommand = "SELECT * FROM TESTITEM WHERE TYPE=" + droptype[index].SelectedValue;
@@ -85,11 +103,19 @@ namespace HospitalHelper
             dropitem[index].DataBind();
         }
 
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
+        }
+
         protected void Bsubmit_Click(object sender, EventArgs e)
         {
+            if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
+
             int month = 0 - Convert.ToInt32(Tmonth.Text);
             GridView grid = new GridView();
             form1.Controls.Add(grid);
+            submit = form1.Controls.IndexOf(grid);
 
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
             SqlConnection conn = new SqlConnection(strcon);

@@ -19,16 +19,25 @@ namespace HospitalHelper
         {         
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
             sourcet = new SqlDataSource(strcon, "SELECT * FROM TESTTYPE");
-            droptype = new DropDownList();
-            form1.Controls.Add(droptype);
-            droptype.AutoPostBack = true;
-            droptype.DataSource = sourcet;
-            droptype.DataTextField = "NAME";
-            droptype.DataValueField = "TYPE";
-            droptype.SelectedIndexChanged += new EventHandler(DropDownList1_SelectedIndexChanged);
-            droptype.DataBind();
+            //droptype = new DropDownList();
+            //form1.Controls.Add(droptype);
+            //droptype.AutoPostBack = true;
+            //droptype.DataSource = sourcet;
+            //droptype.DataTextField = "NAME";
+            //droptype.DataValueField = "TYPE";
+            //droptype.SelectedIndexChanged += new EventHandler(DropDownList1_SelectedIndexChanged);      
+            //droptype.DataBind();
+            if (!IsPostBack)
+            {
+                DropDownList1.DataSource = sourcet;
+                DropDownList1.DataTextField = "NAME";
+                DropDownList1.DataValueField = "TYPE";
+                DropDownList1.AutoPostBack = true;
+                DropDownList1.SelectedIndexChanged += new EventHandler(DropDownList1_SelectedIndexChanged);
+                DropDownList1.DataBind();
+            }
 
-            source = new SqlDataSource(strcon, "SELECT * FROM [TESTITEM],[TESTRESULT] WHERE TESTITEM.TID=TESTRESULT.TID AND TESTITEM.TYPE=TESTRESULT.TYPE AND TESTITEM.TYPE =" + droptype.SelectedValue);
+            source = new SqlDataSource(strcon, "SELECT * FROM [TESTITEM],[TESTRESULT] WHERE TESTITEM.TID=TESTRESULT.TID AND TESTITEM.TYPE=TESTRESULT.TYPE AND TESTITEM.TYPE =" + DropDownList1.SelectedValue);
             GridView1.Columns[5].Visible = true;
             GridView1.DataSource = source;
             GridView1.DataBind();
@@ -38,7 +47,7 @@ namespace HospitalHelper
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
-            source = new SqlDataSource(strcon, "SELECT * FROM [TESTITEM],[TESTRESULT] WHERE TESTITEM.TID=TESTRESULT.TID AND TESTITEM.TYPE=TESTRESULT.TYPE AND TESTITEM.TYPE =" + droptype.SelectedValue);
+            source = new SqlDataSource(strcon, "SELECT * FROM [TESTITEM],[TESTRESULT] WHERE TESTITEM.TID=TESTRESULT.TID AND TESTITEM.TYPE=TESTRESULT.TYPE AND TESTITEM.TYPE =" + DropDownList1.SelectedValue);
             GridView1.Columns[5].Visible = true;
             GridView1.DataSource = source;
             GridView1.DataBind();

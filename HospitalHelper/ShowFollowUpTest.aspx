@@ -10,10 +10,8 @@
     <form id="form1" runat="server">
     <div>
     
-<%--        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="true"
-            DataSourceID="SqlDataSource1" DataTextField="NAME" DataValueField="TYPE" 
-            onselectedindexchanged="DropDownList1_SelectedIndexChanged">
-        </asp:DropDownList>--%>
+        <asp:DropDownList ID="DropDownList1" runat="server" >
+        </asp:DropDownList>
 <%--        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
             SelectCommand="SELECT * FROM [TESTTYPE]"></asp:SqlDataSource>--%>
