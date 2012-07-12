@@ -110,6 +110,7 @@ namespace HospitalHelper
 
         protected void Bsubmit_Click(object sender, EventArgs e)
         {
+            string[] unit = new string[100];
             if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
 
             int month = 0 - Convert.ToInt32(Tmonth.Text);
@@ -120,6 +121,17 @@ namespace HospitalHelper
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
             SqlConnection conn = new SqlConnection(strcon);
             conn.Open();
+            for (int i = 0; i < count; i++)
+            {
+                SqlCommand tmpcom = new SqlCommand("SELECT UNIT FROM TESTITEM WHERE TID=@TID AND TYPE=@TYPE", conn);
+                tmpcom.Parameters.Add("@TID", dropitem[i].SelectedValue);
+                tmpcom.Parameters.Add("@TYPE", droptype[i].SelectedValue);
+                tmpcom.ExecuteNonQuery();
+                SqlDataReader tmpre = tmpcom.ExecuteReader();
+                tmpre.Read();
+                unit[i] = tmpre.GetString(0);
+                tmpre.Close();
+            }
             SqlCommand comm = new SqlCommand("SELECT FDATE,RESULT,TYPE,TID FROM FOLLOWUP,TESTRESULT WHERE FOLLOWUP.FID=TESTRESULT.FID AND FDATE>@FDATE ORDER BY FDATE ASC", conn);
             comm.Parameters.Add("@FDATE", System.DateTime.Now.AddMonths(month));
             comm.ExecuteNonQuery();
@@ -128,7 +140,7 @@ namespace HospitalHelper
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("时间"));
             for (int i = 0; i < count; i++)
-                dt.Columns.Add(new DataColumn(dropitem[i].SelectedItem.Text));
+                dt.Columns.Add(new DataColumn(dropitem[i].SelectedItem.Text + "(" + unit[i] + ")"));
 
             int j = -1; DateTime tmp = System.DateTime.Now.AddDays(1);
 
@@ -147,7 +159,7 @@ namespace HospitalHelper
                 for (int i = 0; i < count; i++)
                     if (reader.GetInt32(2) == Convert.ToInt32(droptype[i].SelectedValue) && reader.GetInt32(3) == Convert.ToInt32(dropitem[i].SelectedValue))
                     {
-                        rows[j][dropitem[i].SelectedItem.Text] = reader.GetString(1);
+                        rows[j][dropitem[i].SelectedItem.Text + "(" + unit[i] + ")"] = reader.GetString(1);
                         break;
                     }
             }

@@ -110,7 +110,7 @@ namespace HospitalHelper
 
         void Load_Complete(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -121,6 +121,31 @@ namespace HospitalHelper
             grid[index].Columns[5].Visible = true;
             grid[index].DataBind();
             displayvalue(grid[index]);
+        }
+
+        protected void Submit_Click(object sender, EventArgs e)
+        {
+            string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
+            SqlConnection conn = new SqlConnection(strcon);
+            conn.Open();
+            
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < grid[i].Rows.Count; j++)
+                {
+                    string tmpr = ((TextBox)(grid[i].Rows[j].Cells[3].Controls[0])).Text.Trim();
+                    if ( tmpr!= "")
+                    {
+                        SqlCommand comm = new SqlCommand("INSERT INTO TESTRESULT VALUES(@FID,@TYPE,@TID,@RESULT)", conn);
+                        comm.Parameters.Add("@FID", 1);
+                        comm.Parameters.Add("@TYPE", droptype[i].SelectedValue);
+                        comm.Parameters.Add("@TID", grid[i].Rows[j].Cells[0].Text);
+                        comm.Parameters.Add("@RESULT", tmpr);
+                        comm.ExecuteNonQuery();
+                    }
+                }              
+            }
+            Response.Redirect("Login.aspx");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
