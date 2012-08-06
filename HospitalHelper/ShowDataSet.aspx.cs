@@ -8,6 +8,7 @@ using System.Data.OleDb;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
+using System.Drawing;
 
 namespace HospitalHelper
 {
@@ -97,7 +98,7 @@ namespace HospitalHelper
             //if (form1.Controls.Count % 2 != 0) form1.Controls.RemoveAt(form1.Controls.Count - 1);
             if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
 
-            int index = (form1.Controls.IndexOf((DropDownList)sender) - 14) / 2;
+            int index = (form1.Controls.IndexOf((DropDownList)sender) - 20) / 2;
             source[index].SelectCommand = "SELECT * FROM TESTITEM WHERE TYPE=" + droptype[index].SelectedValue;
             dropitem[index].DataSource = source[index];
             dropitem[index].DataBind();
@@ -108,14 +109,26 @@ namespace HospitalHelper
             if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
         }
 
+        protected void Bchos_Click(object sender, EventArgs e)
+        {
+            Button tmp = (Button)sender;
+            if (tmp.ID == "Bgrid") Mchos.SetActiveView(View1);
+            else
+            {
+                Pic_Init();
+                Mchos.SetActiveView(View2);
+            }
+        }
+
         protected void Bsubmit_Click(object sender, EventArgs e)
         {
-            if (submit > 0) { form1.Controls.RemoveAt(submit); submit = 0; }
+            //if (submit > 0) { View1.Controls.RemoveAt(submit); submit = 0; }
 
             int month = 0 - Convert.ToInt32(Tmonth.Text);
-            GridView grid = new GridView();
-            form1.Controls.Add(grid);
-            submit = form1.Controls.IndexOf(grid);
+            //GridView grid = new GridView();
+            //form1.Controls.Add(grid);
+            //View1.Controls.Add(grid);
+            //submit = View1.Controls.IndexOf(grid);
 
             string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
             SqlConnection conn = new SqlConnection(strcon);
@@ -155,11 +168,24 @@ namespace HospitalHelper
             reader.Close();
             conn.Close();
 
-            grid.DataSource = dt;
-            grid.DataBind();
-
-
+            (View1.Controls[1] as GridView).DataSource = dt;
+            (View1.Controls[1] as GridView).DataBind();
         }
 
+        protected void Pic_Init()
+        {
+            Bitmap bm = new Bitmap(301, 301);
+            Graphics g = Graphics.FromImage(bm);
+            g.Clear(Color.White);
+            Pen pen = new Pen(Color.Black);
+            Point point1 = new Point(0,0);
+            Point point2 = new Point(0,300);
+            Point point3 = new Point(300, 300);
+            g.DrawLine(pen, point1, point2);
+            g.DrawLine(pen, point2, point3);
+            bm.Save(Server.MapPath("pic"),System.Drawing.Imaging.ImageFormat.Icon);
+            Ipic.ImageUrl = "pic";
+            
+        }
     }
 }

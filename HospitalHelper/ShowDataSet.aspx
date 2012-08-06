@@ -24,7 +24,19 @@
             SelectCommand="SELECT * FROM [TESTTYPE]"></asp:SqlDataSource>
     
         <asp:Button ID="Bsubmit" runat="server" Text="提交" onclick="Bsubmit_Click" />
-    
+
+        <asp:Button ID="Bgrid" runat="server" Text="表格" BorderWidth="0" OnClick="Bchos_Click" />
+        <asp:Button ID="Bpic" runat="server" Text="图形" BorderWidth="0" OnClick="Bchos_Click" />
+    <asp:MultiView ID="Mchos" runat="server" ActiveViewIndex="0">
+    <asp:View ID="View1" runat="server">
+    <asp:GridView ID="gird" runat="server" />
+    </asp:View>
+    <asp:View ID="View2" runat="server">
+<%--    <asp:Label ID="Lpic" runat="server" Text="Picture" />--%>
+<br />
+    <asp:Image ID="Ipic" runat="server" />
+    </asp:View>
+    </asp:MultiView>
     </div>
     </form>
 </body>
