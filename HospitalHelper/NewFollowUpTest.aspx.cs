@@ -76,13 +76,41 @@ namespace HospitalHelper
                 bresult.ItemTemplate = template;
                 grid[i].Columns.Add(bresult);
 
+                BoundField bmin = new BoundField();
+                bmin.DataField = "MINVALUE";
+                bmin.HeaderText = "参考值";
+                grid[i].Columns.Add(bmin);
+
+                BoundField bmax = new BoundField();
+                bmax.DataField = "MAXVALUE";
+                grid[i].Columns.Add(bmax);
+
+                grid[i].Columns[5].Visible = true;
                 grid[i].DataBind();
+                displayvalue(grid[i]);
             }
+        }
+
+        protected void displayvalue(GridView GridView1)
+        {
+            for (int i = 0; i < GridView1.Rows.Count; i++)
+            {
+                Response.Write(GridView1.Rows[i].Cells[4].Text);
+                Response.Write(GridView1.Rows[i].Cells[5].Text);
+                if (GridView1.Rows[i].Cells[4].Text.Trim() == "" && GridView1.Rows[i].Cells[5].Text.Trim() != "")
+                    GridView1.Rows[i].Cells[4].Text = "<" + GridView1.Rows[i].Cells[5].Text.Trim();
+                else if (GridView1.Rows[i].Cells[4].Text.Trim() != "" && GridView1.Rows[i].Cells[5].Text.Trim() == "")
+                    GridView1.Rows[i].Cells[4].Text = ">" + GridView1.Rows[i].Cells[5].Text.Trim();
+                else if (GridView1.Rows[i].Cells[4].Text.Trim() != "" && GridView1.Rows[i].Cells[5].Text.Trim() != "")
+                    GridView1.Rows[i].Cells[4].Text += "～" + GridView1.Rows[i].Cells[5].Text.Trim();
+
+            }
+            GridView1.Columns[5].Visible = false;
         }
 
         void Load_Complete(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -90,7 +118,34 @@ namespace HospitalHelper
             int index = (form1.Controls.IndexOf((DropDownList)sender) - 3) / 2 - 1;
             source[index].SelectCommand = "SELECT * FROM TESTITEM WHERE TYPE=" + Convert.ToInt32(droptype[index].SelectedValue);
             //grid[index].DataSource = source[index];
+            grid[index].Columns[5].Visible = true;
             grid[index].DataBind();
+            displayvalue(grid[index]);
+        }
+
+        protected void Submit_Click(object sender, EventArgs e)
+        {
+            string strcon = System.Configuration.ConfigurationManager.ConnectionStrings["HospitalData"].ConnectionString;
+            SqlConnection conn = new SqlConnection(strcon);
+            conn.Open();
+            
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < grid[i].Rows.Count; j++)
+                {
+                    string tmpr = ((TextBox)(grid[i].Rows[j].Cells[3].Controls[0])).Text.Trim();
+                    if ( tmpr!= "")
+                    {
+                        SqlCommand comm = new SqlCommand("INSERT INTO TESTRESULT VALUES(@FID,@TYPE,@TID,@RESULT)", conn);
+                        comm.Parameters.Add("@FID", 1);
+                        comm.Parameters.Add("@TYPE", droptype[i].SelectedValue);
+                        comm.Parameters.Add("@TID", grid[i].Rows[j].Cells[0].Text);
+                        comm.Parameters.Add("@RESULT", tmpr);
+                        comm.ExecuteNonQuery();
+                    }
+                }              
+            }
+            Response.Redirect("Login.aspx");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -140,7 +195,19 @@ namespace HospitalHelper
             bresult.ItemTemplate = template;
             grid[count].Columns.Add(bresult);
 
-            grid[count++].DataBind();
+            BoundField bmin = new BoundField();
+            bmin.DataField = "MINVALUE";
+            bmin.HeaderText = "参考值";
+            grid[count].Columns.Add(bmin);
+
+            BoundField bmax = new BoundField();
+            bmax.DataField = "MAXVALUE";
+            grid[count].Columns.Add(bmax);
+
+            grid[count].Columns[5].Visible = true;
+            grid[count].DataBind();
+            displayvalue(grid[count++]);
+            //grid[count++].DataBind();
         }
     }
 }

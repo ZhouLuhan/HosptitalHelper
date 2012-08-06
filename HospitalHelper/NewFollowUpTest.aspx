@@ -10,12 +10,12 @@
     <form id="form1" runat="server">
     <div>
     
-        <asp:Button ID="Button1" runat="server" Text="添加" onclick="Button1_Click" />
+        <asp:Button ID="Button1" runat="server" Text="添加" OnClick="Button1_Click" />
     
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:HospitalData %>" 
             SelectCommand="SELECT * FROM [TESTTYPE]"></asp:SqlDataSource>
-    
+    <asp:Button ID="Bsubmit" runat="server" Text="提交" OnClick="Submit_Click" />
     </div>
     </form>
 </body>

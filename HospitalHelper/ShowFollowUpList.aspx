@@ -17,8 +17,7 @@
     </div>
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False"
         DataKeyNames="FID">
-        <Columns>
-        <asp:BoundField DataField="FID" Visible="false" />
+        <Columns>     
             <asp:HyperLinkField DataNavigateUrlFields="FID" 
                 DataNavigateUrlFormatString="ShowFollowUpProspect.aspx?FID={0}" 
                 DataTextField="FDATE" HeaderText="时间" />
@@ -26,6 +25,7 @@
             <asp:BoundField DataField="FDESCRIPTION" HeaderText="描述" 
                 SortExpression="FDESCRIPTION" />
             <asp:BoundField DataField="DESCRIPTION" HeaderText="标签" />
+            <asp:BoundField DataField="FID" HeaderText="ID"/>
         </Columns>
     </asp:GridView>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"
